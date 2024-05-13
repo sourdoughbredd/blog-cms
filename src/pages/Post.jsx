@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
-import { fetchPost, fetchComments } from "../api";
+import { fetchPost, fetchComments, deletePost } from "../api";
 import { AuthContext } from "../context/authContext";
 import { addComment as sendPostComment } from "../api";
 
@@ -152,8 +152,37 @@ const Post = () => {
     return <h1>Error Loading Post: {postError.message}</h1>;
   }
 
+  async function deletePostBtnClicked() {
+    try {
+      const response = await deletePost(postId);
+      if (response.error) {
+        console.error("Error deleting post with response...");
+        console.error(response);
+        alert("Error deleting post. See console for details.");
+      } else {
+        alert("Successfully deleted post. Press ok to return home.");
+        window.location.href = "/";
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <>
+      <h1>Actions</h1>
+      <div className="actions-container">
+        <button onClick={deletePostBtnClicked}>
+          <span>Delete Post</span>
+        </button>
+        <a href="">
+          <span>Update Post</span>
+        </a>
+        <a href="">
+          <span>Delete Comment</span>
+        </a>
+      </div>
+      <hr />
       <PostContent post={post} />
       <Comments comments={comments} />
     </>
