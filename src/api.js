@@ -27,6 +27,16 @@ export async function deletePost(postId) {
   return await response.json();
 }
 
+export async function updatePost(postId, title, text, isPublished) {
+  console.log("Updating post from api...");
+  const response = await fetch(`${BASE_URL}/posts/${postId}`, {
+    method: "PUT",
+    headers: getHeaders(),
+    body: JSON.stringify({ title, text, isPublished }),
+  });
+  return await response.json();
+}
+
 // USER ACTIONS
 
 // Fetch all posts
