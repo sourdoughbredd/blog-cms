@@ -8,7 +8,7 @@ import Home from "./pages/Home";
 import Post from "./pages/Post";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import AddPost from "./pages/AddPost";
+import CreatePost from "./pages/CreatePost";
 
 // App Layout Component with context providers
 const Layout = () => {
@@ -33,6 +33,7 @@ function App() {
         { path: "posts/:postId", element: <Post /> },
         { path: "users/login", element: <Login /> },
         { path: "users/signup", element: <Signup /> },
+        { path: "posts/create", element: <CreatePost /> },
       ],
     },
   ]);
