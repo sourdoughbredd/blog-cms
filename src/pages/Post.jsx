@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
 import { fetchPost, fetchComments, deletePost } from "../api";
 import { AuthContext } from "../context/authContext";
-import { addComment as sendPostComment } from "../api";
+import { addComment as sendPostComment, deleteComment } from "../api";
 
 // Utils
 function formatDate(timestamp) {
@@ -67,8 +67,24 @@ const CommentForm = () => {
   );
 };
 
-const Comments = ({ comments }) => {
+const Comments = ({ postId, comments }) => {
   const { authenticated } = useContext(AuthContext);
+
+  async function deleteCommentBtnClicked(event, commentId) {
+    try {
+      const response = await deleteComment(postId, commentId);
+      if (response.error) {
+        console.error("Error deleting comment with response...");
+        console.error(response);
+        alert("Error deleting comment. See console for details.");
+      } else {
+        alert("Successfully deleted comment.");
+        location.reload();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <div className="comments-container">
@@ -87,6 +103,12 @@ const Comments = ({ comments }) => {
               by {comment.user.username} on {formatDate(comment.timestamp)}{" "}
             </p>
           </div>
+          <button
+            className="comment-delete-btn"
+            onClick={(e) => deleteCommentBtnClicked(e, comment._id)}
+          >
+            <span>Delete Comment</span>
+          </button>
         </div>
       ))}
     </div>
@@ -179,13 +201,10 @@ const Post = () => {
         <a href={`/posts/${postId}/update`}>
           <span>Update Post</span>
         </a>
-        <a href="">
-          <span>Delete Comment</span>
-        </a>
       </div>
       <hr />
       <PostContent post={post} />
-      <Comments comments={comments} />
+      <Comments postId={post._id} comments={comments} />
     </>
   );
 };

@@ -37,6 +37,18 @@ export async function updatePost(postId, title, text, isPublished) {
   return await response.json();
 }
 
+export async function deleteComment(postId, commentId) {
+  console.log("Deleting comment from api...");
+  const response = await fetch(
+    `${BASE_URL}/posts/${postId}/comments/${commentId}`,
+    {
+      method: "DELETE",
+      headers: getHeaders(),
+    }
+  );
+  return await response.json();
+}
+
 // USER ACTIONS
 
 // Fetch all posts
