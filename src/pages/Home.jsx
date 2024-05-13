@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { fetchPosts } from "../api";
-import { AuthContext } from "../context/authContext";
 
 function formatDate(timestamp) {
   return new Date(timestamp).toLocaleString("en-US", {
@@ -15,9 +14,10 @@ function formatDate(timestamp) {
 }
 
 const PostCard = ({ post }) => {
+  const publishClass = post.isPublished ? "" : " not-published";
   return (
     <a href={"/posts/" + post._id}>
-      <div className="post-card">
+      <div className={"post-card" + publishClass}>
         <h3>{post.title}</h3>
         <p>{formatDate(post.timestamp)}</p>
       </div>
@@ -61,17 +61,8 @@ const Home = () => {
     <>
       <h1>Actions</h1>
       <div className="actions-container">
-        <a href="">
+        <a href="/posts/create">
           <span>Add Post</span>
-        </a>
-        <a href="">
-          <span>Delete Post</span>
-        </a>
-        <a href="">
-          <span>Update Post</span>
-        </a>
-        <a href="">
-          <span>Delete Comment</span>
         </a>
       </div>
       <hr />
