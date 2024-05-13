@@ -34,13 +34,13 @@ const CreatePost = () => {
         if (response.error.code === 401) {
           alert("Error adding post. Must be logged in as an Author!");
         } else {
-          alert("Error adding post. Check console for details.");
           console.log("Error adding post with response...");
           console.error(response);
+          alert("Error adding post. Check console for details.");
         }
       } else {
         alert("Successfully added post! Press ok to see it.");
-        window.location.href = "/";
+        window.location.href = "/posts/" + response.post._id;
       }
     } catch (err) {
       console.error(err);
