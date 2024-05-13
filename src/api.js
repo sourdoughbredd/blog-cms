@@ -18,6 +18,15 @@ export async function createPost(title, text, isPublished) {
   return await response.json();
 }
 
+export async function deletePost(postId) {
+  console.log("Deleting post from api...");
+  const response = await fetch(`${BASE_URL}/posts/${postId}`, {
+    method: "DELETE",
+    headers: getHeaders(),
+  });
+  return await response.json();
+}
+
 // USER ACTIONS
 
 // Fetch all posts
