@@ -25,6 +25,7 @@ const PostContent = ({ post }) => {
       <h3>
         by {post.user.username} on {formatDate(post.timestamp)}
       </h3>
+      <h3>{`Is Published? ${post.isPublished}`}</h3>
       <p>{post.text}</p>
     </div>
   );
@@ -175,7 +176,7 @@ const Post = () => {
         <button onClick={deletePostBtnClicked}>
           <span>Delete Post</span>
         </button>
-        <a href="">
+        <a href={`/posts/${postId}/update`}>
           <span>Update Post</span>
         </a>
         <a href="">
