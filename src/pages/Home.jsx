@@ -66,7 +66,7 @@ const Home = () => {
         </a>
       </div>
       <hr />
-      <h1>Blog Posts</h1>
+      <h1>Edit Blog Posts</h1>
       <div className="post-card-container">
         {posts.map((post) => (
           <PostCard key={post._id} post={post} />
