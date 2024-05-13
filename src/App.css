@@ -11,15 +11,25 @@
   flex-direction: column;
 }
 
+.checkbox-group {
+  flex-direction: row;
+  gap: 12px;
+}
+
+textarea {
+  resize: vertical;
+}
+
 /* HOME */
 
 .actions-container {
   display: flex;
-  justify-content: space-around;
+  gap: 24px;
   margin-bottom: 24px;
 }
 
-.actions-container a {
+.actions-container a,
+.actions-container button {
   width: 140px;
   height: 90px;
   border: 2px solid white;
@@ -52,6 +62,10 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
+}
+
+.post-card.not-published {
+  opacity: 0.5;
 }
 
 .post-card h3 {
@@ -87,3 +101,9 @@
 .comments-container button {
   width: 100px;
 }
+
+.comments-container .comment-delete-btn {
+  width: 200px;
+}
+
+/* CREATE POST */
