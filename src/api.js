@@ -6,6 +6,20 @@ const getHeaders = () => ({
   "Content-Type": "application/json",
 });
 
+// AUTHOR ACTIONS
+
+export async function createPost(title, text, isPublished) {
+  console.log("Creating new post from api...");
+  const response = await fetch(`${BASE_URL}/posts`, {
+    method: "POST",
+    headers: getHeaders(),
+    body: JSON.stringify({ title, text, isPublished }),
+  });
+  return await response.json();
+}
+
+// USER ACTIONS
+
 // Fetch all posts
 export async function fetchPosts() {
   console.log("Fetching all posts from api...");
